@@ -2,11 +2,9 @@
 
 ### [Project Page](https://lioryariv.github.io/idr/) | [Paper](https://arxiv.org/abs/2003.09852) | [Data](https://www.dropbox.com/sh/5tam07ai8ch90pf/AADniBT3dmAexvm_J1oL__uoa)
 
-<div align="center">
-	<video width="100%" playsinline="" autoplay="" loop="" preload="" muted="">
-		<source src="media/teaser.mp4" type="video/mp4">
-	</video>
-</div>
+<p align="center">
+  <img width="100%" src="media/teaser.gif"/>
+</p>
 
 This repository contains an implementation to the NeurIPS 2020 paper <a href="https://arxiv.org/abs/2003.09852">Multiview Neural Surface Reconstruction with Implicit Lighting and Material</a>.
 
@@ -81,9 +79,10 @@ python evaluation/eval.py --exps_folder trained_models --conf ./confs/dtu_traine
 
 ### Disentanglement of geometry and appearance
 
-<div align="center">
-  <img width="100%" src="switch_wn_flatt.jpg"/>
-</div>
+<p align="center">
+  <img width="100%" src="media/switch_wn_flatt.jpg"/>
+</p>
+
 
 Towards the goal of disentangling geometry and appearance, we can transfer the appearance learned from one scene to unseen geometry. 
 Running:
