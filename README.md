@@ -77,6 +77,7 @@ python evaluation/eval.py --exps_folder trained_models --conf ./confs/dtu_traine
 ```
 
 
+
 ### Disentanglement of geometry and appearance
 
 <p align="center">
@@ -84,16 +85,14 @@ python evaluation/eval.py --exps_folder trained_models --conf ./confs/dtu_traine
 </p>
 
 
-Towards the goal of disentangling geometry and appearance, we can transfer the appearance learned from one scene to unseen geometry. 
-Running:
-
-For two models trained on two different DTU scenes, we show (left to right): the reconstructed geometry; novel views using the trained renderer; and novel views rendered using the renderer from the other (unseen) scene.
+For transferring the appearance learned from one scene to unseen geometry, run:
 
 ```
 cd ./code
 python evaluation/eval.py --geometry_id GEOMETRY_ID --appearance_id APPEARANCE _ID
 ```
-Will produce novel views of the geometry of the `GEOMETRY_ID` scan trained model, and the rendering of the `APPEARANCE_ID` scan trained model.
+
+This script will produce novel views of the geometry of the `GEOMETRY_ID` scan trained model, and the rendering of the `APPEARANCE_ID` scan trained model.
 
 ## Citation
 If you find our work useful in your research, please consider citing:
