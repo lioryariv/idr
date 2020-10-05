@@ -6,7 +6,7 @@
   <img width="100%" src="media/teaser.gif"/>
 </p>
 
-This repository contains an implementation to the NeurIPS 2020 paper <a href="https://arxiv.org/abs/2003.09852">Multiview Neural Surface Reconstruction with Implicit Lighting and Material</a>.
+This repository contains an implementation for the NeurIPS 2020 paper <a href="https://arxiv.org/abs/2003.09852">Multiview Neural Surface Reconstruction with Implicit Lighting and Material</a>.
 
 The paper introduce Implicit Differentiable Renderer (IDR): a neural network architecture that simultaneously learns the 3D geometry, appearance and cameras from a set of 2D images.
 IDR able to produce high fidelity 3D surface reconstruction, by disentangling geometry and appearance, learned solely from masked 2D images and rough camera estimates.
@@ -16,7 +16,7 @@ IDR able to produce high fidelity 3D surface reconstruction, by disentangling ge
 The code is compatible with python 3.7 and pytorch 1.2. In addition, the following packages are required:  
 numpy, pyhocon, plotly, scikit-image, trimesh, imageio, opencv, torchvision.
 
-You can create an anaconda environment called `idr` with the required dependencies by runnig:
+You can create an anaconda environment called `idr` with the required dependencies by running:
 ```
 conda env create -f environment.yml
 conda activate idr
