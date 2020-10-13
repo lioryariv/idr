@@ -1,4 +1,4 @@
-# Multiview Neural Surface Reconstruction with Implicit Lighting and Material
+# Multiview Neural Surface Reconstruction <br> by Disentangling Geometry and Appearance
 
 ### [Project Page](https://lioryariv.github.io/idr/) | [Paper](https://arxiv.org/abs/2003.09852) | [Data](https://www.dropbox.com/sh/5tam07ai8ch90pf/AADniBT3dmAexvm_J1oL__uoa)
 
@@ -6,7 +6,7 @@
   <img width="100%" src="media/teaser.gif"/>
 </p>
 
-This repository contains an implementation for the NeurIPS 2020 paper <a href="https://arxiv.org/abs/2003.09852">Multiview Neural Surface Reconstruction with Implicit Lighting and Material</a>.
+This repository contains an implementation for the NeurIPS 2020 paper <a href="https://arxiv.org/abs/2003.09852">Multiview Neural Surface Reconstruction by Disentangling Geometry and Appearance</a>.
 
 The paper introduce Implicit Differentiable Renderer (IDR): a neural network architecture that simultaneously learns the 3D geometry, appearance and cameras from a set of 2D images.
 IDR able to produce high fidelity 3D surface reconstruction, by disentangling geometry and appearance, learned solely from masked 2D images and rough camera estimates.
