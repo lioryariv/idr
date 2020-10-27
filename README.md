@@ -98,7 +98,7 @@ This script will produce novel views of the geometry of the `GEOMETRY_ID` scan t
 If you find our work useful in your research, please consider citing:
 
 	@article{yariv2020multiview,
-	title={Multiview Neural Surface Reconstruction with Implicit Lighting and Material},
+	title={Multiview Neural Surface Reconstruction by Disentangling Geometry and Appearance},
 	author={Lior Yariv and Yoni Kasten and Dror Moran 
 	  	    and Meirav Galun and Matan Atzmon and Ronen Basri and Yaron Lipman},
 	journal={NeurIPS},
