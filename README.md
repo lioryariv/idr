@@ -99,10 +99,10 @@ If you find our work useful in your research, please consider citing:
 
 	@article{yariv2020multiview,
 	title={Multiview Neural Surface Reconstruction by Disentangling Geometry and Appearance},
-	author={Lior Yariv and Yoni Kasten and Dror Moran 
-	  	    and Meirav Galun and Matan Atzmon and Ronen Basri and Yaron Lipman},
-	journal={NeurIPS},
-	year={2020},
+	author={Yariv, Lior and Kasten, Yoni and Moran, Dror and Galun, Meirav and Atzmon, Matan and Ronen, Basri and Lipman, Yaron},
+	journal={Advances in Neural Information Processing Systems},
+	volume={33},
+	year={2020}
 	}
 	
 	
