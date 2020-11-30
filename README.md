@@ -89,7 +89,7 @@ For transferring the appearance learned from one scene to unseen geometry, run:
 
 ```
 cd ./code
-python evaluation/eval.py --geometry_id GEOMETRY_ID --appearance_id APPEARANCE _ID
+python evaluation/eval_disentanglement.py --geometry_id GEOMETRY_ID --appearance_id APPEARANCE _ID
 ```
 
 This script will produce novel views of the geometry of the `GEOMETRY_ID` scan trained model, and the rendering of the `APPEARANCE_ID` scan trained model.
