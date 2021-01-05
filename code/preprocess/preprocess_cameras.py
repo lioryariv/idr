@@ -2,7 +2,11 @@ import numpy as np
 import matplotlib.image as mpimg
 import matplotlib.pyplot as plt
 import cv2
+import argparse
+from glob import glob
+import os
 
+import utils.general as utils
 
 def get_Ps(cameras,number_of_cameras):
     Ps = []
@@ -67,11 +71,12 @@ def get_fundamental_matrices(P_0, Ps):
         Fs.append(F_i0)
     return np.array(Fs)
 
-def get_all_mask_points(number_of_cameras,masks_path):
+def get_all_mask_points(masks_dir):
+    mask_paths = sorted(utils.glob_imgs(masks_dir))
     mask_points_all=[]
     mask_ims = []
-    for i in range(0,number_of_cameras):
-        img = mpimg.imread('%s/%03d.png' % (masks_path, i))
+    for path in mask_paths:
+        img = mpimg.imread(path)
         cur_mask = img.max(axis=2) > 0.5
         mask_points = np.where(img.max(axis=2) > 0.5)
         xs = mask_points[1]
@@ -83,7 +88,7 @@ def get_all_mask_points(number_of_cameras,masks_path):
 def refine_visual_hull(masks, Ps, scale, center):
     num_cam=masks.shape[0]
     GRID_SIZE=100
-    MINIMAL_VIEWS=45
+    MINIMAL_VIEWS=45 # Fitted for DTU, might need to change for different data.
     im_height=masks.shape[1]
     im_width = masks.shape[2]
     xx, yy, zz = np.meshgrid(np.linspace(-scale, scale, GRID_SIZE), np.linspace(-scale, scale, GRID_SIZE),
@@ -174,42 +179,36 @@ def get_normalization_function(Ps,mask_points_all,number_of_normalization_points
     return normalization,all_Xs
 
 
-def get_normalization(scan_id,use_linear_init=False):
-    if scan_id<80:
-        number_of_cameras=49
-    else:
-        number_of_cameras=64
+def get_normalization(source_dir, use_linear_init=False):
+    print('Preprocessing', source_dir)
+
     if use_linear_init:
         #Since there is noise in the cameras, some of them will not apear in all the cameras, so we need more points
         number_of_normalization_points=1000
-        cameras_path="../data/DTU/scan%d/cameras_linear_init.npz"%scan_id
+        cameras_filename = "cameras_linear_init"
     else:
         number_of_normalization_points = 100
-        cameras_path = "../data/DTU/scan%d/cameras.npz" % scan_id
+        cameras_filename = "cameras"
 
-    masks_path="../data/DTU/scan%d/mask/"%scan_id
-    cameras=np.load(cameras_path)
+    masks_dir='{0}/mask'.format(source_dir)
+    cameras=np.load('{0}/{1}.npz'.format(source_dir, cameras_filename))
 
-    mask_points_all,masks_all=get_all_mask_points(number_of_cameras,masks_path)
+    mask_points_all,masks_all=get_all_mask_points(masks_dir)
+    number_of_cameras = len(masks_all)
     Ps = get_Ps(cameras, number_of_cameras)
 
     normalization,all_Xs=get_normalization_function(Ps, mask_points_all, number_of_normalization_points, number_of_cameras,masks_all)
 
-    data={}
+    cameras_new={}
     for i in range(number_of_cameras):
-        data['scale_mat_%d'%i]=normalization
-        data['scale_mat_inv_%d' % i] = normalization
+        cameras_new['scale_mat_%d'%i]=normalization
+        cameras_new['world_mat_%d' % i] = np.concatenate((Ps[i],np.array([[0,0,0,1.0]])),axis=0).astype(np.float32)
 
-        data['world_mat_%d' % i] = np.concatenate((Ps[i],np.array([[0,0,0,1.0]])),axis=0).astype(np.float32)
-        data['world_mat_inv_%d' % i] = np.linalg.inv( data['world_mat_%d' % i] )
-
+    np.savez('{0}/{1}_new.npz'.format(source_dir, cameras_filename), **cameras_new)
 
     print(normalization)
-    if use_linear_init:
-        np.savez('../data/DTU/scan%d/cameras_linear_init_2.npz'%scan_id, **data)
-    else:
-        np.savez('../data/DTU/scan%d/cameras_2.npz'%scan_id, **data)
     print('--------------------------------------------------------')
+
     if False: #for debugging
         for i in range(number_of_cameras):
             plt.figure()
@@ -220,10 +219,21 @@ def get_normalization(scan_id,use_linear_init=False):
 
             plt.plot(xy[0, :], xy[1, :], '*')
             plt.show()
-if __name__ == "__main__":
-    inds=[24,37,40,55,63,65,69,83,97,105,106,110,114,118,122]
-    for ind in inds:
-        print(ind)
-        get_normalization(ind,False)
-        get_normalization(ind, True)
 
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--source_dir', type=str, default='', help='data source folder for preprocess')
+    parser.add_argument('--dtu', default=False, action="store_true", help='If set, apply preprocess to all DTU scenes.')
+    parser.add_argument('--use_linear_init', default=False, action="store_true", help='If set, preprocess for linear init cameras.')
+
+    opt = parser.parse_args()
+
+    if opt.dtu:
+        source_dir = '../data/DTU'
+        scene_dirs = sorted(glob(os.path.join(source_dir, "scan*")))
+        for scene_dir in scene_dirs:
+            get_normalization(scene_dir,opt.use_linear_init)
+    else:
+        get_normalization(opt.source_dir, opt.use_linear_init)
+
+    print('Done!')
