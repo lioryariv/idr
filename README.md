@@ -108,20 +108,20 @@ The normalization matrix is used to normalize the cameras such that the visual h
 
 In order to generate a normalization matrix for each scan, we used the input object masks and camera projection matrices. A script that demonstrate this process is presented in: "code/preprocess/preprocess_cameras.py". Note: in order to run the supplied 15 scans, it is not required to run this script. 
 
-For preprocess all dtu:
+For running the pre-processing script on all DTU scans:
 ```
 cd ./code
 python preprocess_cameras.py --dtu
 ```
 
-For running preprocess on linear init cameras:
+For running the pre-process script on the linear init cameras:
 
 ```
 cd ./code
 python preprocess_cameras.py --dtu --use_linear_init
 ```
 
-For running preprocess for new data:
+For running the pre-process script on a new data folder:
 
 ```
 cd ./code
