@@ -101,7 +101,7 @@ cameras.npz #for fixed cameras setup
 cameras_linear_init.npz #for trainable cameras setup
 ```
 The cameras file contains for each image a projection matrix (named "world_mat_{i}"), and a normalization matrix (named "scale_mat_{i}").
-A 3x4 camera projection matrix, $P = K[R t]$ projects points from 3D coordinates to image pixels by the formula: d[x; y; 1]=P[X;Y;Z;1] where K is a 3x3 calibration matrix, [R t] is 3x4 a world to camera Euclidean transformation, [X;Y;Z] is the 3D point, [x;y] is the 2D pixel coordinates of the projected point and d is the depth of the point.
+A 3x4 camera projection matrix, P = K[R t] projects points from 3D coordinates to image pixels by the formula: d[x; y; 1]=P[X;Y;Z;1] where K is a 3x3 calibration matrix, [R t] is 3x4 a world to camera Euclidean transformation, [X;Y;Z] is the 3D point, [x;y] is the 2D pixel coordinates of the projected point and d is the depth of the point.
 The "world_mat" matrix is a conctenation of the camera projection matrix with a row vector of [0,0,0,1] (which makes it a 4x4 matrix).
 
 The normalization matrix is used to normalize the cameras such that the visual hull of the observed object is approximately inside the unit sphere. 
