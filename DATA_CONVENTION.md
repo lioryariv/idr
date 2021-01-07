@@ -5,7 +5,7 @@ Besides RGB and mask images, IDR needs cameras information in order to run. For 
 - `cameras.npz` for fixed cameras setup
 - `cameras_linear_init.npz` for trainable cameras setup
 
-The cameras file contains for each image a projection matrix (named "world_mat_{i}"), and a normalization matrix (named "scale_mat_{i}").
+A cameras file contains for each image a projection matrix (named "world_mat_{i}"), and a normalization matrix (named "scale_mat_{i}").
 
 #### Camera projection matrix
 A 3x4 camera projection matrix, P = K[R t] projects points from 3D coordinates to image pixels by the formula: d[x; y; 1]=P[X;Y;Z;1] where K is a 3x3 calibration matrix, [R t] is 3x4 a world to camera Euclidean transformation, [X;Y;Z] is the 3D point, [x;y] is the 2D pixel coordinates of the projected point and d is the depth of the point.
@@ -35,7 +35,7 @@ python preprocess_cameras.py --dtu --use_linear_init
 #### New data
 In order to run IDR on new data [DIR PATH], you need to supply `image` and `mask` directories, as well as `cameras.npz` file containing the appropriate camera projection matrices.
 
-For running the pre-process script to generate the suitable normalization matrix:
+For running the pre-process script to generate a `cameras.npz` file that contains the suitable normalization matrix:
 
 ```
 cd ./code
