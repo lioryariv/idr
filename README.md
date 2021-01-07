@@ -30,7 +30,7 @@ The 15 scans data, including the manually annotated masks and the noisy initiali
 ```
 bash data/download_data.sh 
 ```
-For more information on the data convention and how to run IDR on new data please have a look at <a href="https://github.com/lioryariv/idr/blob/main/DATA_CONVENTION.md">data convention</a>.<br><br>
+For more information on the data convention and how to run IDR on a new data please have a look at <a href="https://github.com/lioryariv/idr/blob/main/DATA_CONVENTION.md">data convention</a>.<br><br>
 
 We used our method to generate 3D reconstructions in two different setups:
 #### Training with fixed ground truth cameras
